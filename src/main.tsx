@@ -1,8 +1,8 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
+import { BrowserRouter } from 'react-router-dom';
 
 /**
  * 加载微应用
@@ -11,9 +11,9 @@ import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helpe
 function render(props: any) {
   const { container } = props;
   ReactDOM.render(
-    <React.StrictMode>
+    <BrowserRouter>
       <App />
-    </React.StrictMode>,
+    </BrowserRouter>,
     container ? container.querySelector('#root') : document.getElementById('root')
   );
 }
@@ -25,6 +25,7 @@ renderWithQiankun({
   },
   bootstrap() {
     console.log('bootstrap');
+    console.log(process.env.NODE_ENV);
   },
   unmount(props: any) {
     console.log('unmount');
@@ -36,5 +37,5 @@ renderWithQiankun({
 
 if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
   console.log('我正在作为独立应用运行');
-  render(document.getElementById('root') as any);
+  render({});
 }

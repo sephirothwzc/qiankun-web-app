@@ -1,45 +1,66 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { createElement, lazy, Suspense, useState } from 'react';
+import styles from './App.module.less';
+import { ConfigProvider, Spin } from 'antd';
+import zhCN from 'antd/lib/locale/zh_CN';
+import { Route, Routes } from 'react-router-dom';
+import { routeConfig } from './route';
+
+const NavBar = lazy(() => import('./views/nav-bar'));
+const Error404 = lazy(() => import('./components/error/404'));
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
+    <ConfigProvider csp={{ nonce: 'YourNonceCode' }} locale={zhCN}>
+      <Routes>
+        <Route
+          path="/nav-bar"
+          element={
+            <Suspense
+              fallback={
+                <div className={styles.example}>
+                  <Spin size="large" />
+                </div>
+              }
+            >
+              <NavBar />
+            </Suspense>
+          }
+        ></Route>
+        {routeConfig?.map?.((p) => (
+          <Route
+            key={p.name}
+            path={p.path}
+            element={
+              <Suspense
+                fallback={
+                  <div className={styles.example}>
+                    <Spin size="large" />
+                  </div>
+                }
+              >
+                {createElement(p.component)}
+              </Suspense>
+            }
+          ></Route>
+        ))}
+
+        <Route
+          path="*"
+          element={
+            <Suspense
+              fallback={
+                <div className={styles.example}>
+                  <Spin size="large" />
+                </div>
+              }
+            >
+              <Error404 />
+            </Suspense>
+          }
+        />
+      </Routes>
+    </ConfigProvider>
+  );
 }
 
-export default App
+export default App;

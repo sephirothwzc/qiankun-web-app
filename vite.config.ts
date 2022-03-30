@@ -40,6 +40,10 @@ export default defineConfig({
   server: {
     port: 8098,
     open: true,
+    // 配置跨域请求头，解决开发环境的跨域问题
+    headers: {
+      'Access-Control-Allow-Origin': '*', // 允许所有域名的脚本访问该资源
+    },
     proxy: {
       // 字符串简写方式
       '/admin-web': 'http://10.199.209.111:8088/admin-web',
