@@ -3,13 +3,16 @@ import './index.css';
 import App from './App';
 import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
 import { BrowserRouter } from 'react-router-dom';
+import { overloadShared } from './qiankun/shared';
 
 /**
  * 加载微应用
  * @param props
  */
 function render(props: any) {
-  const { container } = props;
+  const { container, shared } = props;
+  shared && overloadShared(shared);
+
   ReactDOM.render(
     <BrowserRouter>
       <App />

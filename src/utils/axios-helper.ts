@@ -1,5 +1,6 @@
 import axios from 'axios';
 import store from '@/redux/store';
+import { set } from 'lodash';
 
 const service = axios.create({
   timeout: 5000, //超时时间
@@ -19,6 +20,8 @@ service.interceptors.request.use(
         ...config.params,
         jwt: store.getState().login?.appUser?.token,
       };
+      set(config, 'headers.Authorization', 'Bearer ' + store.getState().login?.appUser?.token);
+      set(config, 'headers.X-User-Id', store.getState().login?.appUser?.token);
     }
     return config;
   },

@@ -27,10 +27,10 @@ export const SharedModule = { getToken, setToken };
  * 微应用 替换
  * @param param0
  */
-export const overloadShared = ({
-  getTokenGlobal,
-  setTokenGlobal,
-}: {
-  getTokenGlobal: () => Maybe<string>;
-  setTokenGlobal: (token: string) => void;
-}) => {};
+export const overloadShared = (param: {
+  getToken: () => Maybe<string>;
+  setToken: (token: string) => void;
+}) => {
+  SharedModule.getToken = param.getToken;
+  SharedModule.setToken = param.setToken;
+};
