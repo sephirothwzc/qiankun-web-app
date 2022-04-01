@@ -32,8 +32,9 @@ function App() {
             path={p.path}
             element={
               <Suspense
+                key={p.name}
                 fallback={
-                  <div className={styles.example}>
+                  <div key={p.name} className={styles.example}>
                     <Spin size="large" />
                   </div>
                 }

@@ -18,6 +18,14 @@ export type WebResult<T> = {
   status?: number;
 };
 
+/**
+ * 分页组件
+ */
+export type WebPageResult<T> = WebResult<{ data: Array<T>; total: number }>;
+
+/**
+ * 意见反馈模糊查询
+ */
 export type FeedbackType = {
   /**
    * 经纪人ID
@@ -63,4 +71,16 @@ export type FeedbackType = {
    * 意见类型名称
    */
   suggestionTypeName?: string;
+  id?: string;
+};
+
+/**
+ * 消息
+ */
+export type MessageType = {
+  id: string;
+  /**
+   * 启用
+   */
+  enableFlag: boolean;
 };
