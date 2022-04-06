@@ -63,7 +63,9 @@ const columns: Array<ProColumns<FeedbackType>> = [
     title: '操作',
     valueType: 'option',
     key: 'option',
-    render: (text, record, _, action) => [<Link to={`/feedback/${record.id}`}>跟进</Link>],
+    render: (text, record, _, action) => [
+      <Link to={`/feedback/${record.suggestionId}`}>跟进</Link>,
+    ],
   },
 ];
 

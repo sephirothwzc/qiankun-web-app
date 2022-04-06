@@ -33,19 +33,49 @@ export type FeedbackType = {
   brokerId?: string;
 
   /**
+   * 经纪人姓名
+   */
+  brokerName?: string;
+
+  /**
+   * 经纪人手机号 联系方式
+   */
+  brokerTel?: string;
+
+  /**
    * 创建时间
    */
   createTime?: string;
 
   /**
-   * 图片集合
+   * 创建时间 字符串
    */
-  imgArray?: Array<{ imageUrl: string }>;
+  createTimeStr?: string;
+
+  /**
+   * 图片地址集合
+   */
+  imgUrlList?: Array<string>;
+
+  /**
+   * 意见跟进标识 0:未跟进 1:已跟进
+   */
+  respFlag?: number;
+
+  /**
+   * 意见跟进状态描述 0:未跟进 1:已跟进
+   */
+  respFlagDesc?: string;
 
   /**
    * 意见跟进时间
    */
   respTime?: string;
+
+  /**
+   * 意见跟进时间 字符串
+   */
+  respTimeStr?: string;
 
   /**
    * 跟进响应内容
@@ -58,7 +88,7 @@ export type FeedbackType = {
   suggestionDesc?: string;
 
   /**
-   *
+   * 意见表主键
    */
   suggestionId?: string;
 
@@ -71,7 +101,6 @@ export type FeedbackType = {
    * 意见类型名称
    */
   suggestionTypeName?: string;
-  id?: string;
 };
 
 /**
